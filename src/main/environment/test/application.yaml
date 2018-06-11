@@ -1,0 +1,13 @@
+server:
+    port: 8080
+
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://localhost:3306/nfc?useAffectedRows=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: root
+        password:
+    profiles:
+        include:
+          - basic
+

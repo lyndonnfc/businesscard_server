@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfc.lyndon.nfccard.dao.nfcard.NfcBusinessCardInfoMapper">
+  <resultMap id="BaseResultMap" type="com.nfc.lyndon.nfccard.entity.nfccard.NfcBusinessCardInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="english_real_name" jdbcType="VARCHAR" property="englishRealName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="english_postion" jdbcType="VARCHAR" property="englishPostion" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="english_department" jdbcType="VARCHAR" property="englishDepartment" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="english_company_name" jdbcType="VARCHAR" property="englishCompanyName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="postcode" jdbcType="VARCHAR" property="postcode" />
+    <result column="web_url" jdbcType="VARCHAR" property="webUrl" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="qq_account" jdbcType="VARCHAR" property="qqAccount" />
+    <result column="wechat_account" jdbcType="VARCHAR" property="wechatAccount" />
+    <result column="msn_account" jdbcType="VARCHAR" property="msnAccount" />
+    <result column="weibo_account" jdbcType="VARCHAR" property="weiboAccount" />
+    <result column="company_account" jdbcType="VARCHAR" property="companyAccount" />
+    <result column="address" jdbcType="LONGVARCHAR" property="address" />
+    <result column="english_address" jdbcType="LONGVARCHAR" property="englishAddress" />
+    <result column="logo" jdbcType="LONGVARCHAR" property="logo" />
+    <result column="card_url" jdbcType="LONGVARCHAR" property="cardUrl" />
+    <result column="other_msg" jdbcType="LONGVARCHAR" property="otherMsg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, real_name, english_real_name, phone, mobile, position, english_postion, 
+    department, english_department, company_name, english_company_name, email, postcode, 
+    web_url, fax, qq_account, wechat_account, msn_account, weibo_account, company_account
+  </sql>
+  <sql id="Blob_Column_List">
+    address, english_address, logo, card_url, other_msg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from nfc_business_card_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.NfcBusinessCardInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into nfc_business_card_info (uid, real_name, english_real_name, 
+      phone, mobile, position, 
+      english_postion, department, english_department, 
+      company_name, english_company_name, email, 
+      postcode, web_url, fax, 
+      qq_account, wechat_account, msn_account, 
+      weibo_account, company_account, address, 
+      english_address, logo, card_url, 
+      other_msg)
+    values (#{uid,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{englishRealName,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{englishPostion,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{englishDepartment,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{englishCompanyName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{webUrl,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{qqAccount,jdbcType=VARCHAR}, #{wechatAccount,jdbcType=VARCHAR}, #{msnAccount,jdbcType=VARCHAR}, 
+      #{weiboAccount,jdbcType=VARCHAR}, #{companyAccount,jdbcType=VARCHAR}, #{address,jdbcType=LONGVARCHAR}, 
+      #{englishAddress,jdbcType=LONGVARCHAR}, #{logo,jdbcType=LONGVARCHAR}, #{cardUrl,jdbcType=LONGVARCHAR}, 
+      #{otherMsg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.NfcBusinessCardInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into nfc_business_card_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="englishRealName != null">
+        english_real_name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="englishPostion != null">
+        english_postion,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="englishDepartment != null">
+        english_department,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="englishCompanyName != null">
+        english_company_name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="postcode != null">
+        postcode,
+      </if>
+      <if test="webUrl != null">
+        web_url,
+      </if>
+      <if test="fax != null">
+        fax,
+      </if>
+      <if test="qqAccount != null">
+        qq_account,
+      </if>
+      <if test="wechatAccount != null">
+        wechat_account,
+      </if>
+      <if test="msnAccount != null">
+        msn_account,
+      </if>
+      <if test="weiboAccount != null">
+        weibo_account,
+      </if>
+      <if test="companyAccount != null">
+        company_account,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="englishAddress != null">
+        english_address,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="cardUrl != null">
+        card_url,
+      </if>
+      <if test="otherMsg != null">
+        other_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishRealName != null">
+        #{englishRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="englishPostion != null">
+        #{englishPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="englishDepartment != null">
+        #{englishDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishCompanyName != null">
+        #{englishCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="webUrl != null">
+        #{webUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="qqAccount != null">
+        #{qqAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatAccount != null">
+        #{wechatAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="msnAccount != null">
+        #{msnAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboAccount != null">
+        #{weiboAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccount != null">
+        #{companyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="englishAddress != null">
+        #{englishAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cardUrl != null">
+        #{cardUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherMsg != null">
+        #{otherMsg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.NfcBusinessCardInfo">
+    update nfc_business_card_info
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishRealName != null">
+        english_real_name = #{englishRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="englishPostion != null">
+        english_postion = #{englishPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="englishDepartment != null">
+        english_department = #{englishDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishCompanyName != null">
+        english_company_name = #{englishCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="webUrl != null">
+        web_url = #{webUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="qqAccount != null">
+        qq_account = #{qqAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatAccount != null">
+        wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="msnAccount != null">
+        msn_account = #{msnAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboAccount != null">
+        weibo_account = #{weiboAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccount != null">
+        company_account = #{companyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="englishAddress != null">
+        english_address = #{englishAddress,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cardUrl != null">
+        card_url = #{cardUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherMsg != null">
+        other_msg = #{otherMsg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getNfcBusinessCardInfoListByUid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from nfc_business_card_info
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+
+</mapper>
