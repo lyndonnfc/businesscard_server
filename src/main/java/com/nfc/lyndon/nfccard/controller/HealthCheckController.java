@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class HealthCheckController {
 
-    @BizDescription("小程序-健康检查")
+    @BizDescription("健康检查接口")
     @RequestMapping(value = "health", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Result checkHealth() {
         return Result.success(null,"接口正常");

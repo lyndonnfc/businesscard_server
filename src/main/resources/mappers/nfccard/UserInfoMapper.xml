@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfc.lyndon.nfccard.dao.nfcard.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.nfc.lyndon.nfccard.entity.nfccard.UserInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="vefify_code" jdbcType="VARCHAR" property="vefifyCode" />
+    <result column="expiry_time" jdbcType="TIMESTAMP" property="expiryTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mobile, vefify_code, expiry_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.UserInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info (mobile, vefify_code, expiry_time
+      )
+    values (#{mobile,jdbcType=VARCHAR}, #{vefifyCode,jdbcType=VARCHAR}, #{expiryTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.UserInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="vefifyCode != null">
+        vefify_code,
+      </if>
+      <if test="expiryTime != null">
+        expiry_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="vefifyCode != null">
+        #{vefifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expiryTime != null">
+        #{expiryTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.UserInfo">
+    update user_info
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="vefifyCode != null">
+        vefify_code = #{vefifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expiryTime != null">
+        expiry_time = #{expiryTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.UserInfo">
+    update user_info
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      vefify_code = #{vefifyCode,jdbcType=VARCHAR},
+      expiry_time = #{expiryTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByConditions" parameterType="com.nfc.lyndon.nfccard.entity.nfccard.UserInfo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where
+      mobile = #{mobile,jdbcType=VARCHAR}
+      AND vefify_code = #{vefifyCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where
+    mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+</mapper>
