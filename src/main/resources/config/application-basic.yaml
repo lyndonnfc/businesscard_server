@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /nfc_server
+
 spring:
     application:
       name: nfc_service

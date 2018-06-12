@@ -53,12 +53,12 @@ public class NfcCardController implements LoggerInterface {
     }
 
     @BizDescription("创建名片")
-    @PostMapping(value = "createBusinessCard", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "createBusinessCard", produces = MediaType.APPLICATION_JSON_VALUE)
     public Result createBusinessCard(@RequestBody NfcBusinessCardInfo businessCardInfo)  {
-        int id = nfcCardService.saveNfcBusinessCard(businessCardInfo);
-        if (id > 0) {
+        int count = nfcCardService.saveNfcBusinessCard(businessCardInfo);
+        if (count > 0) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id",id);
+            jsonObject.put("id",businessCardInfo.getId());
             return Result.success(jsonObject,"保存成功");
         }
         return Result.error("保存失败");
@@ -71,17 +71,17 @@ public class NfcCardController implements LoggerInterface {
         if (cardInfo == null) {
             return Result.error("当前名片不存在");
         }
-        int id = nfcCardService.updateNfcBusinessCard(businessCardInfo);
-        if (id > 0) {
+        int count = nfcCardService.updateNfcBusinessCard(businessCardInfo);
+        if (count > 0) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id",id);
+            jsonObject.put("businessCardInfo",businessCardInfo);
             return Result.success(jsonObject,"修改成功");
         }
         return Result.error("修改失败");
     }
 
     @BizDescription("获取名片详情")
-    @GetMapping(value = "updateBusinessCard",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "getBusinessCardById",produces = MediaType.APPLICATION_JSON_VALUE)
     public Result getBusinessCardById(Long cardId)  {
         NfcBusinessCardInfo cardInfo = nfcCardService.getNfcBusinessCardById(cardId);
         if (cardInfo == null) {
@@ -93,9 +93,9 @@ public class NfcCardController implements LoggerInterface {
     }
 
     @BizDescription("获取名片列表")
-    @PostMapping(value = "getBusinessCardByList", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Result getBusinessCardByList(Long cardId)  {
-        List<NfcBusinessCardInfo> cardInfoList = nfcCardService.getNfcBusinessCardInfoListByUid(cardId);
+    @GetMapping(value = "getBusinessCardListByUid", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Result getBusinessCardListByUid(Long uid)  {
+        List<NfcBusinessCardInfo> cardInfoList = nfcCardService.getNfcBusinessCardInfoListByUid(uid);
         if (cardInfoList.isEmpty()) {
             cardInfoList = Collections.emptyList();
         }
